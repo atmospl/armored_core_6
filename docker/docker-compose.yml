@@ -19,7 +19,7 @@ services:
       POSTGRES_PASSWORD: jeuW4vi!Es
       POSTGRES_DB: ac6
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
