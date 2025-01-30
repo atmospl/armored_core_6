@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-09)q^$8&ci!kbyl%xka42@$#@_p2x7oxxebnd7%*h+*-66k9&o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'ac6' / 'templates'],  # テンプレートのディレクトリを指定
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
