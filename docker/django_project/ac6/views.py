@@ -11,6 +11,22 @@ def index(request):
     boosters = Booster.objects.all()
     units = Units.objects.all()
 
+    # 初期化しておく
+    total_ap = 0
+    total_bullet_defence = 0
+    total_en_defence = 0
+    total_explosion_defence = 0
+    total_stability = 0
+    recovery_performance = 0
+    en_output = 0
+    en_load = 0
+    arm_load = 0
+    total_weight = 0
+    arm_load_capacity = 0
+    leg_load_capacity = 0
+    unique_units = list(units)
+    warnings = []
+
     context = {
         'heads': heads,
         'cores': cores,
