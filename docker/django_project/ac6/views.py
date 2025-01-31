@@ -26,6 +26,7 @@ def index(request):
     leg_load_capacity = 0
     unique_units = list(units)
     warnings = []
+    final_load_weight = 0
 
     context = {
         'heads': heads,
