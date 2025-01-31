@@ -120,11 +120,11 @@
                 <p class="warning">EN出力不足</p>
             {% endif %}
             {% if arm_load_warning %}
+                <p class="warning">積載超過</p>
             {% endif %}
             {% if weight_warning %}
-            {% endif %}
-                <p class="warning">積載超過</p>
                 <p class="warning">腕部積載超過</p>
+            {% endif %}
             {% for warning in warnings %}
                 <p class="warning">{{ warning }}</p>
             {% endfor %}
