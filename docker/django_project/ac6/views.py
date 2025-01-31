@@ -65,6 +65,8 @@ def index(request):
         arm_load = 0
         total_weight = selected_head.weight + selected_arm.weight + selected_leg.weight + selected_core.weight + selected_generator.weight + selected_booster.weight + selected_fcs.weight
 
+        final_load_weight = selected_head.weight + selected_arm.weight + selected_core.weight + selected_generator.weight + selected_booster.weight + selected_fcs.weight
+
         # 重複チェック
         warnings = []
         used_units = set()
@@ -118,10 +120,11 @@ def index(request):
         'arm_load': arm_load,
         'arm_load_capacity': arm_load_capacity,
         'total_weight': total_weight,
+        'loaded_weight' : final_load_weight,
         'leg_load_capacity': leg_load_capacity,
         'en_warning': en_load > en_output,
         'arm_load_warning': arm_load > arm_load_capacity,
-        'weight_warning': total_weight > leg_load_capacity,
+        'weight_warning': final_load_weight > leg_load_capacity,
         'warnings': warnings,
         'unique_units': unique_units,
         'selected_head': request.POST.get('head'),
