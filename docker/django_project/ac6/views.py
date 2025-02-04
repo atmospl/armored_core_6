@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from .models import Head, Core, Arms, Legs, FCS, Booster, Generator, Units
-
+from .models import Head, Core, Arms, Legs, FCS, Booster, Generator, Units, CustomConfiguration
 def index(request):
     heads = Head.objects.all()
     cores = Core.objects.all()
@@ -141,5 +140,21 @@ def index(request):
             'warnings': warnings,
             'unique_units': unique_units,
         })
+        if 'save_config' in request.POST:
+            config_name = request.POST['config_name']
+            CustomConfiguration.objects.create(
+                name=config_name,
+                head=selected_head,
+                core=selected_core,
+                arm=selected_arm,
+                leg=selected_leg,
+                fcs=selected_fcs,
+                booster=selected_booster,
+                generator=selected_generator,
+                unit_left_arm=selected_unit_left_arm,
+                unit_right_arm=selected_unit_right_arm,
+                unit_left_shoulder=selected_unit_left_shoulder,
+                unit_right_shoulder=selected_unit_right_shoulder
+            )
 
     return render(request, 'ac6/index.html', context)
