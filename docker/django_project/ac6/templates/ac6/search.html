@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>構成検索</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ac6/styles.css' %}">
+</head>
+<body>
+    <h1>構成検索</h1>
+    <form method="get">
+        <label for="query">構成名:</label>
+        <input type="text" id="query" name="query" value="{{ query }}">
+        <button type="submit">検索</button>
+    </form>
+
+    {% if results %}
+        <h2>検索結果</h2>
+        <ul>
+            {% for config in results %}
+                <li>{{ config.name }}</li>
+            {% endfor %}
+        </ul>
+    {% elif query %}
+        <p>該当する構成が見つかりませんでした。</p>
+    {% endif %}
+</body>
+</html>

@@ -158,3 +158,7 @@ def index(request):
             )
 
     return render(request, 'ac6/index.html', context)
+def search(request):
+    query = request.GET.get('query', '')
+    results = CustomConfiguration.objects.filter(name__icontains=query) if query else []
+    return render(request, 'ac6/search.html', {'query': query, 'results': results})
