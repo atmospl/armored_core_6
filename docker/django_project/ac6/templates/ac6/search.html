@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>構成検索</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'ac6/styles.css' %}">
-</head>
+{% extends 'ac6/base.html' %}
+
+{% block title %}パーツ構成登録{% endblock %}
+
+{% block content %}
 <body>
     <h1>構成検索</h1>
     <form method="get">
@@ -47,3 +45,4 @@
     {% endif %}
 </body>
 </html>
+{% endblock %}
