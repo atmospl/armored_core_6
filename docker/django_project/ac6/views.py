@@ -161,4 +161,31 @@ def index(request):
 def search(request):
     query = request.GET.get('query', '')
     results = CustomConfiguration.objects.filter(name__icontains=query) if query else []
-    return render(request, 'ac6/search.html', {'query': query, 'results': results})
+    detailed_results = []
+
+    for config in results:
+        detailed_results.append({
+            'name': config.name,
+            'head': config.head.name,
+            'core': config.core.name,
+            'arm': config.arm.name,
+            'leg': config.leg.name,
+            'fcs': config.fcs.name,
+            'booster': config.booster.name,
+            'generator': config.generator.name,
+            'unit_left_arm': config.unit_left_arm.name if config.unit_left_arm else None,
+            'unit_right_arm': config.unit_right_arm.name if config.unit_right_arm else None,
+            'unit_left_shoulder': config.unit_left_shoulder.name if config.unit_left_shoulder else None,
+            'unit_right_shoulder': config.unit_right_shoulder.name if config.unit_right_shoulder else None,
+            'total_ap': config.head.ap + config.core.ap + config.arm.ap + config.leg.ap,
+            'total_bullet_defence': config.head.bullet_defence + config.core.bullet_defence + config.arm.bullet_defence + config.leg.bullet_defence,
+            'total_en_defence': config.head.en_defence + config.core.en_defence + config.arm.en_defence + config.leg.en_defence,
+            'total_explosion_defence': config.head.explosion_defence + config.core.explosion_defence + config.arm.explosion_defence + config.leg.explosion_defence,
+            'total_stability': config.head.stability + config.core.stability + config.leg.stability,
+            'recovery_performance': config.head.recovery_performance,
+            'en_output': int(config.generator.supply * (config.core.output_correction / 100)),
+            'en_load': config.head.load + config.core.load + config.arm.load + config.leg.load + config.booster.load + config.fcs.load,
+            'total_weight': config.head.weight + config.arm.weight + config.leg.weight + config.core.weight + config.generator.weight + config.booster.weight + config.fcs.weight,
+        })
+
+    return render(request, 'ac6/search.html', {'query': query, 'results': detailed_results})
